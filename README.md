@@ -1,6 +1,6 @@
 Домашние задания:
-1. [Адаптация ClickHouse](HW1.md)
-2. Установка ClickHouse
+1. [Адаптация ClickHouse](./hw1/HW.md)
+2. [Установка ClickHouse](./hw2/HW.md)
 3.
 4.
 5.

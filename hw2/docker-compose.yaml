@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  clickhouse-server:
+    image: clickhouse/clickhouse-server:latest 
+    container_name: clickhouse-server
+    environment:
+      CLICKHOUSE_PASSWORD: 'homework2'
+    ports:
+      - '8123:8123'
+      - '9000:9000'
+    volumes:
+      - ./data/clickhouse:/var/lib/clickhouse
+      - ./logs/clickhouse:/var/log/clickhouse-server
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    networks:
+      - clickhouse-net
+  
+  clickhouse-client:
+    image: clickhouse/clickhouse-client:latest
+    container_name: clickhouse-client
+    entrypoint: /bin/bash
+    command: -c "tail -f /dev/null"
+    depends_on:
+      - clickhouse-server
+    networks:
+      - clickhouse-net
+
+networks:
+  clickhouse-net:
+    driver: bridge
